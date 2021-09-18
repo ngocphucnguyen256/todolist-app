@@ -8,7 +8,7 @@ const Login = function (){
 
     useEffect(()=>{
         axios
-        .get("/api/users")
+        .get("api/users")
         .then((users)=>{setUser(users)})
         .catch((error)=> console.log(error))
     }, [])
@@ -23,7 +23,7 @@ const Login = function (){
 			return;
 		}
 		axios
-			.post("/api/users", {
+			.post("api/users", {
 				username: userName,
 				email: email,
 			})

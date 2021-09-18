@@ -3,7 +3,6 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const path = require('path');
 const app = express();
-require('./database')
 
 
 
@@ -12,8 +11,8 @@ app.use(cors());
 
 //api
 
-const users = require('/api/users');
-app.use('/api/users', users);
+const users = require('./api/user');
+app.use('./api/users', users);
 
 
 //connect db
