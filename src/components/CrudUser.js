@@ -13,8 +13,7 @@ const Login = function (){
         .catch((error)=> console.log(error))
     }, [])
 
-
-	function submitFormLogin(){
+    function submitForm() {
 		if (userName === "") {
 			console.log("Please fill the username field");
 			return;
@@ -24,7 +23,7 @@ const Login = function (){
 			return;
 		}
 		axios
-			.post("http://localhost:5000/api/users/login", {
+			.post("http://localhost:5000/api/users/add", {
 				username: userName,
 				email: email,
 			})
@@ -36,6 +35,7 @@ const Login = function (){
 				console.log("Could not creat account. Please try again");
 			});
 	}
+
 	return (
 		<>
 			<h1>My Project</h1>
@@ -55,7 +55,8 @@ const Login = function (){
 					</ol>
 				</>
 			)}
-			<form onSubmit={submitFormLogin}>
+
+			<form onSubmit={submitForm}>
 				<input
 					onChange={(e) => setUserName(e.target.value)}
 					type="text"
