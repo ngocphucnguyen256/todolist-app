@@ -1,75 +1,37 @@
-import React, {useState, useEffect} from 'react'
-import axios from 'axios'
-
-const Login = function (){
-    const [users, setUsers] = useState(null)
-    const [userName, setUserName] = useState("")
-    const [email, setEmail] = useState("")
-
-    useEffect(()=>{
-        axios
-        .get("http://localhost:5000/api/users")
-        .then((users)=>{setUsers(users.data)})
-        .catch((error)=> console.log(error))
-    }, [])
+// import React, {useState} from 'react'
+// import axios from 'axios'
+// import GoogleLogin  from 'react-google-login'
 
 
-	function submitFormLogin(){
-		if (userName === "") {
-			console.log("Please fill the username field");
-			return;
-		}
-		if (email === "") {
-			console.log("Please fill the email field");
-			return;
-		}
-		axios
-			.post("http://localhost:5000/api/users/login", {
-				username: userName,
-				email: email,
-			})
-			.then(function () {
-				console.log("Account created successfully");
-				// window.location.reload();
-			})
-			.catch(function () {
-				console.log("Could not creat account. Please try again");
-			});
-	}
-	return (
-		<>
-			<h1>My Project</h1>
-			{users === null ? (
-				<p>Loading...</p>
-			) : users.length === 0 ? (
-				<p>No user available</p>
-			) : (
-				<>
-					<h2>Available Users</h2>
-					<ol>
-						{users.map((user, index) => (
-							<li key={index}>
-								Name: {user.name} - Email: {user.email}
-							</li>
-						))}
-					</ol>
-				</>
-			)}
-			<form onSubmit={submitFormLogin}>
-				<input
-					onChange={(e) => setUserName(e.target.value)}
-					type="text"
-					placeholder="Enter your username"
-				/>
-				<input
-					onChange={(e) => setEmail(e.target.value)}
-					type="text"
-					placeholder="Enter your email address"
-				/>
-				<input type="submit" />
-			</form>
-		</>
-	)
-}
 
-export default Login
+// const Login = function (){
+//     const [user, setUser] = useState(null)
+//     const [userName, setUserName] = useState("")
+//     const [email, setEmail] = useState("")
+
+// 	const handleLogin =  async googleData => {
+// 		const res =  await fetch("http://localhost:5000/api/v1/auth/google", { 
+// 			method: "POST", 
+// 			body: JSON.stringify({ 
+// 			token: googleData.tokenId 
+// 		  }), 
+// 		  headers: { 
+// 			"Content-Type": "application /json" 
+// 		  } 
+// 		})
+// 		const data =  await res.json() 
+// 		// store returned user somehow 
+// 	  }
+
+// 	return (
+// 		<GoogleLogin 
+// 		clientId= {process.env.REACT_APP_GOOGLE_CLIENT_ID} 
+// 		buttonText= "Log in with Google" 
+// 		onSuccess= {handleLogin} 
+// 		onFailure= {handleLogin} 
+// 		cookiePolicy= {'single_host_origin'} 
+// 	/>
+// 	)
+// }
+
+// export default Login

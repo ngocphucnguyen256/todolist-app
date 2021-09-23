@@ -11,8 +11,10 @@ app.use(cors());
 
 //api
 
-const users = require('./api/user');
-app.use('/api/users', users);
+
+
+const todolist = require('./api/todolist');
+app.use('/api/todolist', todolist);
 
 
 //connect db
