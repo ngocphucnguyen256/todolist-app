@@ -7,7 +7,9 @@ import Todolist from './components/Todolist'
 class App extends Component {
   render() {
     return (
-      <Todolist/>
+        <div className="app m-12">
+           <Todolist/>
+        </div>
       // <Router>
       //   <div className="container">
       //     <nav className="navbar navbar-expand-lg navbar-light bg-light">

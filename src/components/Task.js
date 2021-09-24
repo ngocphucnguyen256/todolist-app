@@ -75,14 +75,16 @@ const Task = (props) =>{
     
 
     return( 
-        <div className="task card  mt-4" style={{width: "18rem"}}>
+        <div className="task card  mt-4 w-1/4 m-2 rounded-xl p-3 bg-green-300 text-black" >
             <div className="card-body">
-                <input type="text" value={taskName} className="card-title"  disabled={!isEdit} onChange={(e) =>setTaskName(e.target.value)}>
+                <input type="text" value={taskName} className="card-title bg-transparent text-2xl font-bold  mb-4"  disabled={!isEdit} onChange={(e) =>setTaskName(e.target.value)}>
                 </input>
-                <p className="card-text"><Moment toNow>{taskCreatedAt}</Moment></p>
-                <button type="button" className="btn btn-info" onClick={handleEditClick}>Edit</button>
-                <button type="button" className="btn btn-success" onClick={handleSaveClick}>Save</button>
-                <button type="button" className="btn btn-danger" onClick={submitDelete}>Delete</button>
+                <p className="card-text mb-2"><Moment toNow>{taskCreatedAt}</Moment></p>
+                <div className="flex">
+                    <button type="button" className="btn btn-info mr-3" onClick={handleEditClick}>Edit</button>
+                    <button type="button" className="btn btn-success  mr-3" onClick={handleSaveClick}>Save</button>
+                    <button type="button" className="btn btn-danger mr-3" onClick={submitDelete}>Delete</button>
+                </div>
             </div>
       </div>
     )
