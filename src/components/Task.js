@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react'
+import React, {useState, useEffect, useRef} from 'react'
 import axios from 'axios'
 import Moment from 'react-moment'
 
@@ -12,7 +12,7 @@ const Task = (props) =>{
     const [taskName, setTaskName] = useState("")
     const [taskCreatedAt, setTaskCreatedAt] = useState(null)
 
-
+	const inputRef= useRef()
     
 
     const forceUpdate = ()=>{
@@ -28,6 +28,10 @@ const Task = (props) =>{
     }, [props.created, props.name, props.id])
 
 
+
+    useEffect(() =>{
+        inputRef.current.focus()
+    },[isEdit])
 
     function submitDelete() {
 		axios
@@ -75,15 +79,15 @@ const Task = (props) =>{
     
 
     return( 
-        <div className="task card  mt-4 w-1/4 m-2 rounded-xl p-3 bg-green-300 text-black" >
+        <div className="task card  mt-4 rounded-xl p-1 md:p-3 bg-green-300 text-black" >
             <div className="card-body">
-                <input type="text" value={taskName} className="card-title bg-transparent text-2xl font-bold  mb-4"  disabled={!isEdit} onChange={(e) =>setTaskName(e.target.value)}>
+                <input type="text" value={taskName} className="card-title bg-transparent text-2xl font-bold  mb-4" ref={inputRef}  disabled={!isEdit} onChange={(e) =>setTaskName(e.target.value)}>
                 </input>
                 <p className="card-text mb-2"><Moment toNow>{taskCreatedAt}</Moment></p>
-                <div className="flex">
-                    <button type="button" className="btn btn-info mr-3" onClick={handleEditClick}>Edit</button>
-                    <button type="button" className="btn btn-success  mr-3" onClick={handleSaveClick}>Save</button>
-                    <button type="button" className="btn btn-danger mr-3" onClick={submitDelete}>Delete</button>
+                <div className="flex ">
+                    <button type="button" className="btn btn-info mr-3 w-1/3 text-sm" onClick={handleEditClick}>Edit</button>
+                    <button type="button" className="btn btn-success  mr-3 w-1/3 text-sm" onClick={handleSaveClick}>Save</button>
+                    <button type="button" className="btn btn-danger w-1/3 text-sm" onClick={submitDelete}>Delete</button>
                 </div>
             </div>
       </div>

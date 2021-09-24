@@ -11,7 +11,7 @@ const Todolist = function (){
     const [update, setUpdate] = useState(0)
     const [isInput, setIsInput] = useState(false)
 
-	const focusInput= useRef()
+	const inputRef= useRef()
 
     useEffect(()=>{
         axios
@@ -22,8 +22,13 @@ const Todolist = function (){
         .catch((error)=> console.log(error))
     }, [update])
 
+
+	useEffect(()=>{
+		inputRef.current.focus()
+
+	},[isInput])
+
 	const showInput = ()=>{
-		focusInput.current.focus()
 		setIsInput( isInput => !isInput)
 		
 	}
@@ -56,17 +61,17 @@ const Todolist = function (){
 	}
 
 	return (
-		<div className="todolist  ml-10 mr-10 text-white">
-			<h1 className="text-center text-6xl mt-8 mb-12 font-bold">To-Do List</h1>
+		<div className="todolist  md:ml-10 md:mr-10 text-white">
+			<h1 className="text-center text-3xl md:text-6xl mt-8 mb-12 font-bold">To-Do List</h1>
 			{list === null ? (
 				<p>Loading...</p>
 			) : list.length === 0 ? (
 				<p>No task available</p>
 			) : (
 				<>
-					<h2 className="text-xl font-bold">Task list</h2>
+					<h2 className=" text-xl font-bold">Task list</h2>
 					<div className="flex justify-center">
-						<div className="flex flex-wrap justify-start">
+						<div className="grid grid-cols-1 md:grid-cols-3 gap-4">
 							{list.map((item, index) => (
 								<Task key={index} id={item._id} name={item.task} created={item.createdAt} update={forceUpdate}/>
 							))}
@@ -74,12 +79,12 @@ const Todolist = function (){
 					</div>
 				</>
 			)}
-			<div className=" mt-4 fixed bottom-40 left-1/2">
+			<div className=" mt-4 fixed bottom-1/4 left-1/2">
 				<button  className="w-14 block absolute left-1/2 transform -translate-x-1/2 opacity-70" onClick={showInput}><img src={isInput? upIcon : addIcon} alt="Add" /></button>
-				<form onSubmit={(e)=>submitForm(e)} className={`text-black  p-4  justify-center  absolute left-1/2  transform -translate-x-1/2 translate-y-1/2 ${isInput? "flex" : "hidden"} `}>
+				<form onSubmit={(e)=>submitForm(e)} className={`text-black  p-4  justify-center  absolute left-1/2  transform -translate-x-1/2 -translate-y-52   md:translate-y-1/2 ${isInput? "flex" : "hidden"} `}>
 					<input value={newTask}
 						onChange={(e) => setNewTask(e.target.value)}
-						ref={focusInput}
+						ref={inputRef}
 						type="text"
 						placeholder="Enter your task"
 						className="bg-yellow-300  rounded-xl p-4 block mr-2 placeholder-black"
